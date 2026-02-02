@@ -32,7 +32,7 @@ const Index = () => {
     <div className="min-h-screen valentine-gradient flower-pattern relative overflow-hidden">
       {/* Background Music */}
       <audio ref={audioRef} loop>
-        <source src="/audio/background-music.mp3" type="audio/mpeg" />
+        <source src="/audio/romantic-piano.mp3" type="audio/mpeg" />
       </audio>
 
       {/* Mute/Unmute Button */}
