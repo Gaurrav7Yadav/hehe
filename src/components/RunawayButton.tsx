@@ -16,42 +16,49 @@ const RunawayButton = ({
 }: RunawayButtonProps) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [escapeCount, setEscapeCount] = useState(0);
+  const [isEscaping, setIsEscaping] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const originalPosRef = useRef<{ x: number; y: number } | null>(null);
 
   const runAway = useCallback(() => {
     if (escapeCount >= maxEscapes) {
-      // After max escapes, let them click it
       return;
     }
 
     const button = buttonRef.current;
     if (!button) return;
 
-    const rect = button.getBoundingClientRect();
-    const parentRect = button.parentElement?.getBoundingClientRect();
+    // Store original position on first escape
+    if (!originalPosRef.current) {
+      const rect = button.getBoundingClientRect();
+      originalPosRef.current = { x: rect.left, y: rect.top };
+    }
+
+    setIsEscaping(true);
+
+    // Calculate safe bounds (keeping button visible on screen)
+    const buttonWidth = 120;
+    const buttonHeight = 60;
+    const padding = 20;
     
-    if (!parentRect) return;
+    const minX = padding;
+    const maxX = window.innerWidth - buttonWidth - padding;
+    const minY = padding + 60; // Account for header
+    const maxY = window.innerHeight - buttonHeight - padding;
 
-    // Calculate available space
-    const maxX = window.innerWidth - rect.width - 40;
-    const maxY = window.innerHeight - rect.height - 40;
-
-    // Generate random new position
-    let newX = Math.random() * maxX - maxX / 2;
-    let newY = Math.random() * maxY - maxY / 2;
-
-    // Make sure it moves significantly
-    const minMove = 100;
-    if (Math.abs(newX - position.x) < minMove) {
-      newX = position.x + (Math.random() > 0.5 ? minMove : -minMove);
-    }
-    if (Math.abs(newY - position.y) < minMove) {
-      newY = position.y + (Math.random() > 0.5 ? minMove : -minMove);
-    }
-
-    // Clamp to screen bounds
-    newX = Math.max(-200, Math.min(200, newX));
-    newY = Math.max(-150, Math.min(150, newY));
+    // Generate random position within bounds
+    let newX, newY;
+    let attempts = 0;
+    
+    do {
+      newX = minX + Math.random() * (maxX - minX);
+      newY = minY + Math.random() * (maxY - minY);
+      attempts++;
+    } while (
+      attempts < 10 && 
+      Math.abs(newX - position.x) < 80 && 
+      Math.abs(newY - position.y) < 80
+    );
 
     setPosition({ x: newX, y: newY });
     setEscapeCount((prev) => prev + 1);
@@ -70,14 +77,20 @@ const RunawayButton = ({
       onMouseEnter={runAway}
       onTouchStart={runAway}
       className={cn(
-        "relative font-poppins font-semibold rounded-full transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center gap-2 shadow-lg",
+        "font-poppins font-semibold rounded-full transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center gap-2 shadow-lg z-50",
         "bg-secondary text-secondary-foreground px-8 py-4 text-lg border-2 border-primary hover:bg-primary hover:text-primary-foreground",
+        isEscaping && "fixed",
         className
       )}
-      style={{
-        transform: `translate(${position.x}px, ${position.y}px)`,
-        transition: "transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)",
-      }}
+      style={
+        isEscaping
+          ? {
+              left: position.x,
+              top: position.y,
+              transition: "all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)",
+            }
+          : undefined
+      }
     >
       {children}
       {escapeCount > 0 && escapeCount < maxEscapes && (
