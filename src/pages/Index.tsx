@@ -2,6 +2,7 @@ import { Heart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import FloatingHearts from "@/components/FloatingHearts";
 import ValentineButton from "@/components/ValentineButton";
+import RunawayButton from "@/components/RunawayButton";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -45,12 +46,12 @@ const Index = () => {
               <Heart className="w-5 h-5 fill-current" />
             </ValentineButton>
 
-            <ValentineButton
-              variant="secondary"
+            <RunawayButton
               onClick={() => navigate("/why")}
+              maxEscapes={5}
             >
               Why?
-            </ValentineButton>
+            </RunawayButton>
           </div>
         </div>
 
