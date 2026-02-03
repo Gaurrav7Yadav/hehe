@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { cn } from "@/lib/utils";
 
 interface RunawayButtonProps {
@@ -70,16 +71,16 @@ const RunawayButton = ({
     }
   };
 
-  return (
+  const buttonElement = (
     <button
       ref={buttonRef}
       onClick={handleClick}
       onMouseEnter={runAway}
       onTouchStart={runAway}
       className={cn(
-        "font-poppins font-semibold rounded-full transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center gap-2 shadow-lg z-50",
+        "font-poppins font-semibold rounded-full transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center gap-2 shadow-lg",
         "bg-secondary text-secondary-foreground px-8 py-4 text-lg border-2 border-primary hover:bg-primary hover:text-primary-foreground",
-        isEscaping && "fixed",
+        isEscaping && "fixed z-[9999]",
         className
       )}
       style={
@@ -108,6 +109,13 @@ const RunawayButton = ({
       )}
     </button>
   );
+
+  // Use portal when escaping to avoid overflow:hidden clipping
+  if (isEscaping) {
+    return createPortal(buttonElement, document.body);
+  }
+
+  return buttonElement;
 };
 
 export default RunawayButton;
