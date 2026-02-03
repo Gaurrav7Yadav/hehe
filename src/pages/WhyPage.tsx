@@ -2,7 +2,7 @@ import { Heart, AlertCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import FloatingHearts from "@/components/FloatingHearts";
 import ValentineButton from "@/components/ValentineButton";
-import manWithFlowers from "@/assets/man-with-flowers.png";
+import valentineCat from "@/assets/valentine-cat.png";
 import cuteCat from "@/assets/cute-cat.png";
 
 const WhyPage = () => {
@@ -31,9 +31,9 @@ const WhyPage = () => {
           >
             <div className="absolute -inset-4 bg-gradient-to-r from-valentine-pink via-valentine-rose to-valentine-pink rounded-full blur-xl opacity-40 animate-pulse-heart" />
             <img
-              src={manWithFlowers}
-              alt="A hopeful person with flowers"
-              className="relative w-64 h-64 md:w-80 md:h-80 object-contain drop-shadow-2xl animate-bounce-soft"
+              src={valentineCat}
+              alt="Cute cat asking to be your valentine"
+              className="relative w-64 h-64 md:w-80 md:h-80 object-cover rounded-2xl drop-shadow-2xl animate-bounce-soft"
             />
           </div>
 

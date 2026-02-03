@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { Heart, Calendar } from "lucide-react";
 import confetti from "canvas-confetti";
 import FloatingHearts from "@/components/FloatingHearts";
-import couplePhoto from "@/assets/couple-photo.jpeg";
+import coupleSelfie from "@/assets/couple-selfie.jpeg";
 
 const CelebrationPage = () => {
   const hasConfettiFired = useRef(false);
@@ -110,7 +110,7 @@ const CelebrationPage = () => {
           <div className="absolute -inset-4 bg-gradient-to-r from-valentine-pink via-valentine-rose to-valentine-pink rounded-3xl blur-lg opacity-50 animate-pulse-heart" />
           <div className="relative rounded-2xl overflow-hidden border-4 border-primary shadow-2xl shadow-valentine-pink/30">
             <img
-              src={couplePhoto}
+              src={coupleSelfie}
               alt="Our special moment"
               className="w-72 h-72 md:w-96 md:h-96 object-cover"
             />
