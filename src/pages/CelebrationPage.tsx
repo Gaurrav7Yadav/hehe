@@ -107,28 +107,54 @@ const CelebrationPage = () => {
           className="relative mb-10 opacity-0 animate-fade-in-up"
           style={{ animationDelay: "0.3s" }}
         >
-          <div className="absolute -inset-4 bg-gradient-to-r from-valentine-pink via-valentine-rose to-valentine-pink rounded-3xl blur-lg opacity-50 animate-pulse-heart" />
-          <div className="relative rounded-2xl overflow-hidden border-4 border-primary shadow-2xl shadow-valentine-pink/30">
+          {/* Heart-shaped glow behind */}
+          <div 
+            className="absolute -inset-6 bg-gradient-to-r from-valentine-pink via-valentine-rose to-valentine-pink blur-xl opacity-60 animate-pulse-heart"
+            style={{
+              clipPath: "path('M 150 30 C 90 -30 0 30 0 90 C 0 150 75 210 150 270 C 225 210 300 150 300 90 C 300 30 210 -30 150 30 Z')",
+              width: "300px",
+              height: "270px",
+              left: "50%",
+              top: "50%",
+              transform: "translate(-50%, -50%) scale(1.3)",
+            }}
+          />
+          
+          {/* Heart-shaped photo container */}
+          <div 
+            className="relative shadow-2xl shadow-valentine-pink/50"
+            style={{
+              width: "300px",
+              height: "270px",
+              clipPath: "path('M 150 30 C 90 -30 0 30 0 90 C 0 150 75 210 150 270 C 225 210 300 150 300 90 C 300 30 210 -30 150 30 Z')",
+            }}
+          >
             <img
               src={coupleSelfie}
               alt="Our special moment"
-              className="w-72 h-72 md:w-96 md:h-96 object-cover"
+              className="w-full h-full object-cover"
             />
+            {/* Pink overlay for romantic effect */}
+            <div className="absolute inset-0 bg-gradient-to-t from-valentine-pink/20 to-transparent" />
           </div>
 
           {/* Decorative hearts around the photo */}
-          <Heart className="absolute -top-4 -left-4 w-8 h-8 text-heart-red fill-heart-red animate-bounce-soft" />
+          <Heart className="absolute -top-2 left-1/2 -translate-x-1/2 w-10 h-10 text-heart-red fill-heart-red animate-bounce-soft" />
           <Heart
-            className="absolute -top-4 -right-4 w-8 h-8 text-valentine-pink fill-valentine-pink animate-bounce-soft"
+            className="absolute top-1/4 -left-6 w-8 h-8 text-valentine-pink fill-valentine-pink animate-bounce-soft"
             style={{ animationDelay: "0.3s" }}
           />
           <Heart
-            className="absolute -bottom-4 -left-4 w-8 h-8 text-valentine-pink fill-valentine-pink animate-bounce-soft"
+            className="absolute top-1/4 -right-6 w-8 h-8 text-valentine-pink fill-valentine-pink animate-bounce-soft"
             style={{ animationDelay: "0.6s" }}
           />
           <Heart
-            className="absolute -bottom-4 -right-4 w-8 h-8 text-heart-red fill-heart-red animate-bounce-soft"
+            className="absolute bottom-8 -left-4 w-6 h-6 text-heart-red fill-heart-red animate-bounce-soft"
             style={{ animationDelay: "0.9s" }}
+          />
+          <Heart
+            className="absolute bottom-8 -right-4 w-6 h-6 text-heart-red fill-heart-red animate-bounce-soft"
+            style={{ animationDelay: "1.2s" }}
           />
         </div>
 
