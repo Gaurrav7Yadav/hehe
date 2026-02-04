@@ -1,6 +1,5 @@
-import { Heart, Volume2, VolumeX } from "lucide-react";
+import { Heart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
 import FloatingHearts from "@/components/FloatingHearts";
 import ValentineButton from "@/components/ValentineButton";
 import RunawayButton from "@/components/RunawayButton";
@@ -8,45 +7,9 @@ import proposalCat from "@/assets/proposal-cat.jpg";
 
 const Index = () => {
   const navigate = useNavigate();
-  const audioRef = useRef<HTMLAudioElement>(null);
-  const [isMuted, setIsMuted] = useState(false);
-
-  useEffect(() => {
-    // Auto-play background music at low volume
-    if (audioRef.current) {
-      audioRef.current.volume = 0.15;
-      audioRef.current.play().catch(() => {
-        // Autoplay may be blocked by browser
-      });
-    }
-  }, []);
-
-  const toggleMute = () => {
-    if (audioRef.current) {
-      audioRef.current.muted = !audioRef.current.muted;
-      setIsMuted(!isMuted);
-    }
-  };
 
   return (
     <div className="min-h-screen valentine-gradient flower-pattern relative overflow-hidden">
-      {/* Background Music */}
-      <audio ref={audioRef} loop>
-        <source src="/audio/romantic-piano.mp3" type="audio/mpeg" />
-      </audio>
-
-      {/* Mute/Unmute Button */}
-      <button
-        onClick={toggleMute}
-        className="fixed top-4 right-4 z-50 bg-card/80 backdrop-blur-sm p-3 rounded-full shadow-lg hover:scale-110 transition-transform"
-        aria-label={isMuted ? "Unmute" : "Mute"}
-      >
-        {isMuted ? (
-          <VolumeX className="w-5 h-5 text-valentine-deep" />
-        ) : (
-          <Volume2 className="w-5 h-5 text-valentine-deep" />
-        )}
-      </button>
 
       <FloatingHearts />
 
