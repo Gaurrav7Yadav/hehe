@@ -158,10 +158,34 @@ const CelebrationPage = () => {
           />
         </div>
 
+        {/* Video section */}
+        <div
+          className="relative mb-10 opacity-0 animate-fade-in-up w-full max-w-lg mx-auto"
+          style={{ animationDelay: "0.5s" }}
+        >
+          <div className="absolute -inset-4 bg-gradient-to-r from-valentine-pink via-valentine-rose to-valentine-pink rounded-3xl blur-lg opacity-50 animate-pulse-heart" />
+          <div className="relative rounded-2xl overflow-hidden border-4 border-primary shadow-2xl shadow-valentine-pink/30">
+            <video
+              controls
+              autoPlay
+              className="w-full aspect-video object-cover"
+              playsInline
+            >
+              <source src="/videos/celebration-video.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <Heart className="absolute -top-3 -left-3 w-8 h-8 text-heart-red fill-heart-red animate-bounce-soft" />
+          <Heart
+            className="absolute -top-3 -right-3 w-8 h-8 text-valentine-pink fill-valentine-pink animate-bounce-soft"
+            style={{ animationDelay: "0.3s" }}
+          />
+        </div>
+
         {/* Calendar booking card */}
         <div
           className="relative opacity-0 animate-fade-in-up"
-          style={{ animationDelay: "0.6s" }}
+          style={{ animationDelay: "0.8s" }}
         >
           <div className="bg-card/90 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-xl border-2 border-primary max-w-md mx-auto">
             <div className="flex items-center justify-center gap-3 mb-4">
