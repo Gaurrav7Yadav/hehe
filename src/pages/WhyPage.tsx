@@ -1,11 +1,14 @@
-import { Heart, AlertCircle } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Heart, AlertCircle, Eye } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import FloatingHearts from "@/components/FloatingHearts";
 import ValentineButton from "@/components/ValentineButton";
 import valentineCat from "@/assets/valentine-cat.png";
-import cuteCat from "@/assets/cute-cat.png";
+import gauravPhoto from "@/assets/gaurav-photo.jpeg";
+import gauravReveal from "@/assets/gaurav-reveal.jpeg";
 
 const WhyPage = () => {
+  const [isRevealed, setIsRevealed] = useState(false);
   const navigate = useNavigate();
 
   return (
@@ -56,18 +59,18 @@ const WhyPage = () => {
           </div>
         </section>
 
-        {/* Cat section */}
+        {/* Photo section */}
         <section className="min-h-screen flex flex-col items-center justify-center px-4 py-12">
           <div className="text-center opacity-0 animate-fade-in-up">
             <h2 className="font-script text-3xl md:text-5xl text-foreground mb-4">
-              Look who's asking! 🐱
+              Look who's asking! 💕
             </h2>
             <p className="font-poppins text-lg md:text-xl text-valentine-deep mb-8">
               This is who you are saying yes to...
             </p>
           </div>
 
-          {/* Cat image */}
+          {/* Main photo */}
           <div
             className="relative opacity-0 animate-fade-in-up"
             style={{ animationDelay: "0.3s" }}
@@ -75,13 +78,48 @@ const WhyPage = () => {
             <div className="absolute -inset-6 bg-gradient-to-r from-valentine-pink via-accent to-valentine-pink rounded-3xl blur-lg opacity-50 animate-pulse-heart" />
             <div className="relative bg-card/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border-2 border-primary">
               <img
-                src={cuteCat}
-                alt="Cute cat asking to be your valentine"
-                className="w-56 h-56 md:w-72 md:h-72 object-contain mx-auto"
+                src={gauravPhoto}
+                alt="The one asking to be your valentine"
+                className="w-56 h-56 md:w-72 md:h-72 object-cover rounded-xl mx-auto"
               />
               <p className="font-script text-2xl md:text-3xl text-valentine-deep text-center mt-4">
                 How can you say no to this face? 🥺💕
               </p>
+            </div>
+          </div>
+
+          {/* Hidden reveal card */}
+          <div
+            className="relative mt-12 opacity-0 animate-fade-in-up"
+            style={{ animationDelay: "0.6s" }}
+          >
+            <div className="relative w-64 h-80 md:w-72 md:h-96">
+              {/* The hidden image */}
+              <img
+                src={gauravReveal}
+                alt="Surprise reveal"
+                className="w-full h-full object-cover rounded-2xl shadow-xl"
+              />
+              
+              {/* Cover card that hides the image */}
+              <div
+                className={`absolute inset-0 bg-gradient-to-br from-valentine-pink via-valentine-rose to-valentine-deep rounded-2xl shadow-xl border-2 border-primary cursor-pointer flex flex-col items-center justify-center gap-4 transition-opacity duration-500 ${
+                  isRevealed ? "opacity-0 pointer-events-none" : "opacity-100"
+                }`}
+                onClick={() => {
+                  setIsRevealed(true);
+                  setTimeout(() => setIsRevealed(false), 5000);
+                }}
+              >
+                <Eye className="w-12 h-12 text-primary-foreground animate-pulse-heart" />
+                <p className="font-script text-xl md:text-2xl text-primary-foreground text-center px-4">
+                  Still not convinced? 🤔
+                </p>
+                <p className="font-poppins text-sm text-primary-foreground/80 text-center px-4">
+                  Click here to see more... 👀
+                </p>
+                <Heart className="w-6 h-6 text-primary-foreground fill-primary-foreground animate-bounce-soft" />
+              </div>
             </div>
           </div>
         </section>
