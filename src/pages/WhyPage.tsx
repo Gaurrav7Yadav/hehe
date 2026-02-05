@@ -1,16 +1,8 @@
 import { useState, useEffect } from "react";
-import { Heart, AlertCircle, Eye, ChevronLeft, ChevronRight } from "lucide-react";
+import { Heart, AlertCircle, Eye } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import FloatingHearts from "@/components/FloatingHearts";
 import ValentineButton from "@/components/ValentineButton";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
 import valentineCat from "@/assets/valentine-cat.png";
 import gauravPhoto from "@/assets/gaurav-photo.jpeg";
 import gauravReveal from "@/assets/gaurav-reveal.jpeg";
@@ -22,8 +14,6 @@ import vibha4 from "@/assets/vibha-4.jpeg";
 const WhyPage = () => {
   const [isRevealed, setIsRevealed] = useState(false);
   const navigate = useNavigate();
-  
-  const collagePhotos = [vibha1, vibha2, vibha3, vibha4];
 
   return (
     <div className="min-h-screen valentine-gradient flower-pattern relative overflow-hidden">
@@ -84,66 +74,34 @@ const WhyPage = () => {
             </p>
           </div>
 
-          {/* Photo Carousel */}
-          <div 
-            className="w-full max-w-sm md:max-w-md opacity-0 animate-fade-in-up"
-            style={{ animationDelay: "0.3s" }}
-          >
-            <div className="relative">
-              <div className="absolute -inset-4 bg-gradient-to-r from-valentine-pink via-valentine-rose to-valentine-pink rounded-3xl blur-xl opacity-50 animate-pulse-heart" />
-              
-              <Carousel
-                opts={{
-                  align: "center",
-                  loop: true,
-                }}
-                plugins={[
-                  Autoplay({
-                    delay: 3000,
-                    stopOnInteraction: false,
-                  }),
-                ]}
-                className="relative w-full"
+          {/* Photo Collage Grid */}
+          <div className="grid grid-cols-2 gap-4 md:gap-6 max-w-2xl mx-auto">
+            {[vibha1, vibha2, vibha3, vibha4].map((photo, index) => (
+              <div
+                key={index}
+                className="relative opacity-0 animate-fade-in-up group"
+                style={{ animationDelay: `${0.2 + index * 0.15}s` }}
               >
-                <CarouselContent>
-                  {collagePhotos.map((photo, index) => (
-                    <CarouselItem key={index}>
-                      <div className="relative p-2">
-                        <div className="relative overflow-hidden rounded-2xl border-4 border-primary shadow-2xl bg-valentine-soft">
-                          <img
-                            src={photo}
-                            alt={`Beautiful photo ${index + 1}`}
-                            className="w-full h-[400px] md:h-[500px] object-contain transition-transform duration-700 hover:scale-105"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-valentine-deep/20 to-transparent" />
-                          
-                          {/* Floating hearts on each slide */}
-                          <Heart className="absolute top-4 right-4 w-8 h-8 text-heart-red fill-heart-red animate-pulse-heart" />
-                          <Heart 
-                            className="absolute bottom-4 left-4 w-6 h-6 text-valentine-pink fill-valentine-pink animate-bounce-soft"
-                            style={{ animationDelay: "0.5s" }}
-                          />
-                        </div>
-                      </div>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                
-                <CarouselPrevious className="left-2 bg-primary/80 border-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground" />
-                <CarouselNext className="right-2 bg-primary/80 border-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground" />
-              </Carousel>
-              
-              {/* Slide indicators */}
-              <div className="flex justify-center gap-2 mt-4">
-                {collagePhotos.map((_, index) => (
-                  <Heart 
-                    key={index}
-                    className="w-4 h-4 text-valentine-pink fill-valentine-pink animate-pulse-heart"
-                    style={{ animationDelay: `${index * 0.2}s` }}
+                <div className="absolute -inset-2 bg-gradient-to-r from-valentine-pink via-valentine-rose to-valentine-pink rounded-2xl blur-md opacity-0 group-hover:opacity-60 transition-opacity duration-500" />
+                <div 
+                  className="relative overflow-hidden rounded-xl border-2 border-primary shadow-xl transform transition-all duration-500 hover:scale-105 hover:shadow-2xl"
+                  style={{ 
+                    transform: index % 2 === 0 ? 'rotate(-2deg)' : 'rotate(2deg)',
+                  }}
+                >
+                  <img
+                    src={photo}
+                    alt={`Beautiful photo ${index + 1}`}
+                    className="w-40 h-52 md:w-56 md:h-72 object-cover object-top transition-transform duration-700 group-hover:scale-110"
                   />
-                ))}
+                  <div className="absolute inset-0 bg-gradient-to-t from-valentine-deep/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                </div>
+                <Heart 
+                  className="absolute -top-2 -right-2 w-6 h-6 text-heart-red fill-heart-red opacity-0 group-hover:opacity-100 transition-all duration-300 animate-pulse-heart"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                />
               </div>
-            </div>
+            ))}
           </div>
 
           {/* Scroll indicator */}
