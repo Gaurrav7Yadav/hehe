@@ -109,11 +109,11 @@ const WhyPage = () => {
                   {collagePhotos.map((photo, index) => (
                     <CarouselItem key={index}>
                       <div className="relative p-2">
-                        <div className="relative overflow-hidden rounded-2xl border-4 border-primary shadow-2xl bg-card">
+                        <div className="relative overflow-hidden rounded-2xl border-4 border-primary shadow-2xl bg-valentine-soft">
                           <img
                             src={photo}
                             alt={`Beautiful photo ${index + 1}`}
-                            className="w-full h-80 md:h-96 object-cover transition-transform duration-700 hover:scale-105"
+                            className="w-full h-[400px] md:h-[500px] object-contain transition-transform duration-700 hover:scale-105"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-valentine-deep/20 to-transparent" />
                           
