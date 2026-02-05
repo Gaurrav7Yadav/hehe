@@ -6,6 +6,10 @@ import ValentineButton from "@/components/ValentineButton";
 import valentineCat from "@/assets/valentine-cat.png";
 import gauravPhoto from "@/assets/gaurav-photo.jpeg";
 import gauravReveal from "@/assets/gaurav-reveal.jpeg";
+import vibha1 from "@/assets/vibha-1.jpeg";
+import vibha2 from "@/assets/vibha-2.jpeg";
+import vibha3 from "@/assets/vibha-3.jpeg";
+import vibha4 from "@/assets/vibha-4.jpeg";
 
 const WhyPage = () => {
   const [isRevealed, setIsRevealed] = useState(false);
@@ -53,6 +57,60 @@ const WhyPage = () => {
             style={{ animationDelay: "0.9s" }}
           >
             <div className="flex flex-col items-center gap-2 animate-bounce-soft">
+              <Heart className="w-8 h-8 text-valentine-pink fill-valentine-pink" />
+              <div className="w-0.5 h-12 bg-valentine-pink/50 rounded-full" />
+            </div>
+          </div>
+        </section>
+
+        {/* Photo Collage Section */}
+        <section className="min-h-screen flex flex-col items-center justify-center px-4 py-12">
+          <div className="text-center mb-12 opacity-0 animate-fade-in-up">
+            <h2 className="font-script text-4xl md:text-6xl text-foreground mb-4">
+              Because I really like her 💕
+            </h2>
+            <p className="font-poppins text-lg text-valentine-deep">
+              Look at this cutie! 🥰
+            </p>
+          </div>
+
+          {/* Photo Collage Grid */}
+          <div className="grid grid-cols-2 gap-4 md:gap-6 max-w-2xl mx-auto">
+            {[vibha1, vibha2, vibha3, vibha4].map((photo, index) => (
+              <div
+                key={index}
+                className="relative opacity-0 animate-fade-in-up group"
+                style={{ animationDelay: `${0.2 + index * 0.15}s` }}
+              >
+                <div className="absolute -inset-2 bg-gradient-to-r from-valentine-pink via-valentine-rose to-valentine-pink rounded-2xl blur-md opacity-0 group-hover:opacity-60 transition-opacity duration-500" />
+                <div 
+                  className="relative overflow-hidden rounded-xl border-2 border-primary shadow-xl transform transition-all duration-500 hover:scale-105 hover:rotate-1 hover:shadow-2xl"
+                  style={{ 
+                    transform: index % 2 === 0 ? 'rotate(-2deg)' : 'rotate(2deg)',
+                  }}
+                >
+                  <img
+                    src={photo}
+                    alt={`Beautiful photo ${index + 1}`}
+                    className="w-40 h-48 md:w-56 md:h-64 object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-valentine-deep/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                </div>
+                <Heart 
+                  className="absolute -top-2 -right-2 w-6 h-6 text-heart-red fill-heart-red opacity-0 group-hover:opacity-100 transition-all duration-300 animate-pulse-heart"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                />
+              </div>
+            ))}
+          </div>
+
+          {/* Scroll indicator */}
+          <div
+            className="mt-12 opacity-0 animate-fade-in-up"
+            style={{ animationDelay: "1s" }}
+          >
+            <div className="flex flex-col items-center gap-2 animate-bounce-soft">
+              <p className="font-script text-xl text-valentine-deep">Keep scrolling... 💕</p>
               <Heart className="w-8 h-8 text-valentine-pink fill-valentine-pink" />
               <div className="w-0.5 h-12 bg-valentine-pink/50 rounded-full" />
             </div>
